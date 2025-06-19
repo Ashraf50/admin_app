@@ -67,4 +67,18 @@ class AllSectionsCubit extends Cubit<AllSectionsState> {
       },
     );
   }
+
+  Future<void> searchSection(String name, int serviceId) async {
+    emit(SectionLoading());
+    var result =
+        await sectionRepo.searchSection(name: name, serviceId: serviceId);
+    result.fold(
+      (failure) {
+        emit(SectionFailure(message: failure.errMessage));
+      },
+      (sections) {
+        emit(SectionLoaded(sections: sections));
+      },
+    );
+  }
 }

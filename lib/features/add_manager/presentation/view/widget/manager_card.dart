@@ -172,6 +172,7 @@ class _ManagerCardState extends State<ManagerCard> {
                             return DropdownTextField(
                               records: state.records,
                               selectedRecord: selectedRecord,
+                              hint: widget.manager.service!.name!,
                               onChanged: (record) {
                                 setModalState(() {
                                   selectedRecord = record;

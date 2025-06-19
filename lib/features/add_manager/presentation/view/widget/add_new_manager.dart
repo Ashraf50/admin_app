@@ -107,10 +107,35 @@ class _AddNewManagerState extends State<AddNewManager> {
                     if (state is FetchSelectableRecordsLoading) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is FetchSelectableRecordsFailure) {
-                      return Text(state.errMessage);
+                      return Text(
+                        state.errMessage,
+                        style: const TextStyle(color: Colors.red),
+                      );
                     } else if (state is FetchSelectableRecordsSuccess) {
+                      if (state.records.isEmpty) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 12),
+                          margin: const EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey.shade100,
+                          ),
+                          child: Text(
+                            S
+                                .of(context)
+                                .noServicesAvailable, // Add this key in .arb files
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                            ),
+                          ),
+                        );
+                      }
                       return DropdownTextField(
                         records: state.records,
+                        hint:  S.of(context).selectService,
                         selectedRecord: selectedRecord,
                         onChanged: (record) {
                           setState(() {

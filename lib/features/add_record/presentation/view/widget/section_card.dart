@@ -20,48 +20,57 @@ class SectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(
-                Icons.subdirectory_arrow_right,
-                color: Colors.grey,
+              Row(
+                children: [
+                  Text(
+                    "#${section.id}",
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    section.name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                section.name,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+              PopupMenuButton<String>(
+                color: Colors.white,
+                icon: const Icon(Icons.more_vert),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'edit',
+                    child: Text(S.of(context).edit),
+                  ),
+                  PopupMenuItem(
+                    value: 'delete',
+                    child: Text(S.of(context).delete),
+                  ),
+                ],
+                onSelected: (value) {
+                  if (value == 'edit') {
+                    _showEditDialog(context);
+                  } else if (value == 'delete') {
+                    _showDeleteDialog(context);
+                  }
+                },
               ),
             ],
           ),
-          PopupMenuButton<String>(
-            color: Colors.white,
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'edit',
-                child: Text(S.of(context).edit),
-              ),
-              PopupMenuItem(
-                value: 'delete',
-                child: Text(S.of(context).delete),
-              ),
-            ],
-            onSelected: (value) {
-              if (value == 'edit') {
-                _showEditDialog(context);
-              } else if (value == 'delete') {
-                _showDeleteDialog(context);
-              }
-            },
-          ),
+          const Divider(),
         ],
       ),
     );

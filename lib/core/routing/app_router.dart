@@ -2,6 +2,7 @@ import 'package:admin_app/core/helper/navigator_service.dart';
 import 'package:admin_app/core/widget/photo_view.dart';
 import 'package:admin_app/features/Auth/presentation/view/sign_in_view.dart';
 import 'package:admin_app/features/add_manager/presentation/view/widget/add_new_manager.dart';
+import 'package:admin_app/features/add_record/presentation/view/widget/add_section_view_body.dart';
 import 'package:admin_app/features/add_record/presentation/view/widget/create_new_section.dart';
 import 'package:admin_app/features/all_tickets/data/model/ticket_model/ticket_model/ticket_model.dart';
 import 'package:admin_app/features/dashboard/data/model/statistics_model/recent_ticket.dart';
@@ -57,6 +58,23 @@ class AppRouter {
       GoRoute(
         path: '/create_record',
         builder: (context, state) => const CreateNewRecord(),
+      ),
+      GoRoute(
+          path: '/create_section',
+          builder: (context, state) {
+            var id = state.extra as int;
+            return CreateNewSection(
+              serviceId: id,
+            );
+          }),
+      GoRoute(
+        path: '/section_view',
+        builder: (context, state) {
+          var id = state.extra as int;
+          return SectionsView(
+            serviceId: id,
+          );
+        },
       ),
       GoRoute(
           path: '/create_section',

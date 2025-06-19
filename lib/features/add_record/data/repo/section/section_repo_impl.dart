@@ -104,4 +104,29 @@ class SectionRepoImpl implements SectionRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<SectionModel>>> searchSection({
+    required String name,
+    required int serviceId,
+  }) async {
+    try {
+      final token = await getToken();
+      final response = await apiHelper.get(
+        '${AppStrings.baseUrl}/api/admin/services/$serviceId/sections?handle=$name',
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      var data = response.data;
+      var recordList =
+          (data["data"] as List).map((e) => SectionModel.fromJson(e)).toList();
+      return Right(recordList);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDiorError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

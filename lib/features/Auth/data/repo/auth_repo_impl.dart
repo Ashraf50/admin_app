@@ -26,10 +26,10 @@ class AuthRepoImpl implements AuthRepo {
       final data = response.data;
       if (data['type'] == 'success') {
         final user = data['data']['user'];
-        if (user['type'] != 2) {
+        if (user['type'] != 0) {
           return {
             'type': 'error',
-            'message': 'This account is not a manager.',
+            'message': 'This account is not a admin.',
           };
         }
       }

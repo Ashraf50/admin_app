@@ -94,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تفاصيل المدير "),
         "manager_name": MessageLookupByLibrary.simpleMessage("اسم المدير"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "noServicesAvailable":
+            MessageLookupByLibrary.simpleMessage("لا توجد خدمات متاحة"),
         "no_changes_detected":
             MessageLookupByLibrary.simpleMessage("لم يتم تعديل أي شيء"),
         "no_details":
@@ -118,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectService": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
         "service_deleted_successfully":
             MessageLookupByLibrary.simpleMessage("تم حذف الخدمة بنجاح"),
+        "service_details":
+            MessageLookupByLibrary.simpleMessage("تفاصيل الخدمة"),
         "service_id": MessageLookupByLibrary.simpleMessage("معرّف الخدمة"),
         "service_name": MessageLookupByLibrary.simpleMessage("اسم الخدمة"),
         "setting": MessageLookupByLibrary.simpleMessage("الإعدادات"),

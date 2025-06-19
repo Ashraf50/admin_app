@@ -1,26 +1,15 @@
 import 'package:admin_app/core/constant/app_colors.dart';
-import 'package:admin_app/core/helper/api_helper.dart';
 import 'package:admin_app/core/widget/custom_toast.dart';
 import 'package:admin_app/features/add_record/data/model/record_model.dart';
-import 'package:admin_app/features/add_record/data/repo/section/section_repo_impl.dart';
-import 'package:admin_app/features/add_record/presentation/view/widget/section_list.dart';
 import 'package:admin_app/features/add_record/presentation/view_model/cubit/all_record_cubit.dart';
 import 'package:admin_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import '../../view_model/cubit/all_sections_cubit.dart';
 
-class RecordCard extends StatefulWidget {
+class RecordCard extends StatelessWidget {
   final RecordModel record;
   const RecordCard({super.key, required this.record});
-
-  @override
-  State<RecordCard> createState() => _RecordCardState();
-}
-
-class _RecordCardState extends State<RecordCard> {
-  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +21,7 @@ class _RecordCardState extends State<RecordCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "#${widget.record.id}",
+                "#${record.id}",
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 16,
@@ -40,7 +29,7 @@ class _RecordCardState extends State<RecordCard> {
                 ),
               ),
               Text(
-                widget.record.name ?? '',
+                record.name ?? '',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -69,43 +58,18 @@ class _RecordCardState extends State<RecordCard> {
                       }
                     },
                   ),
-                  IconButton(
-                    icon: Icon(
-                      isExpanded ? Icons.expand_less : Icons.expand_more,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isExpanded = !isExpanded;
-                      });
-                      if (isExpanded) {
-                        context
-                            .read<AllSectionsCubit>()
-                            .fetchSections(widget.record.id!);
-                      }
-                    },
-                  ),
                 ],
               ),
             ],
           ),
         ),
-        if (isExpanded)
-          BlocProvider(
-            create: (_) => AllSectionsCubit(SectionRepoImpl(ApiHelper()))
-              ..fetchSections(widget.record.id!),
-            child: SectionList(
-              key: ValueKey(widget.record.id),
-              serviceId: widget.record.id!,
-            ),
-          ),
         const Divider(),
       ],
     );
   }
 
   void _showEditDialog(BuildContext context) {
-    final nameController = TextEditingController(text: widget.record.name);
+    final nameController = TextEditingController(text: record.name);
     final formKey = GlobalKey<FormState>();
     SmartDialog.show(
       builder: (_) => AlertDialog(
@@ -132,7 +96,7 @@ class _RecordCardState extends State<RecordCard> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 final newName = nameController.text.trim();
-                final originalName = widget.record.name!.trim();
+                final originalName = record.name!.trim();
                 if (newName == originalName) {
                   CustomToast.show(
                     message: S.of(context).no_changes_detected,
@@ -140,9 +104,7 @@ class _RecordCardState extends State<RecordCard> {
                   );
                   return;
                 }
-                context
-                    .read<AllRecordCubit>()
-                    .editRecord(widget.record.id!, newName);
+                context.read<AllRecordCubit>().editRecord(record.id!, newName);
                 SmartDialog.dismiss();
               }
             },
@@ -165,7 +127,7 @@ class _RecordCardState extends State<RecordCard> {
           ),
           TextButton(
             onPressed: () {
-              context.read<AllRecordCubit>().deleteRecord(widget.record.id!);
+              context.read<AllRecordCubit>().deleteRecord(record.id!);
               SmartDialog.dismiss();
             },
             child: Text(S.of(context).delete,

@@ -94,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Manager Details"),
         "manager_name": MessageLookupByLibrary.simpleMessage("Manager Name"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "noServicesAvailable":
+            MessageLookupByLibrary.simpleMessage("No services available"),
         "no_changes_detected":
             MessageLookupByLibrary.simpleMessage("no changes detected"),
         "no_details":
@@ -119,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectService": MessageLookupByLibrary.simpleMessage("Select Service"),
         "service_deleted_successfully": MessageLookupByLibrary.simpleMessage(
             "Service deleted successfully"),
+        "service_details":
+            MessageLookupByLibrary.simpleMessage("Service Details"),
         "service_id": MessageLookupByLibrary.simpleMessage("Service Id"),
         "service_name": MessageLookupByLibrary.simpleMessage("Service Name"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),

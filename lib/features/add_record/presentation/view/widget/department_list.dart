@@ -1,8 +1,10 @@
 import 'package:admin_app/features/add_record/presentation/view/widget/record_card.dart';
+import 'package:admin_app/features/add_record/presentation/view/widget/record_card_shimmer.dart';
 import 'package:admin_app/features/add_record/presentation/view_model/cubit/all_record_cubit.dart';
 import 'package:admin_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class DepartmentListView extends StatelessWidget {
   const DepartmentListView({super.key});
@@ -35,13 +37,19 @@ class DepartmentListView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: state.records.length,
                 itemBuilder: (context, index) {
-                  return RecordCard(
-                    record: state.records[index],
+                  return InkWell(
+                    onTap: () {
+                      context.push('/section_view',
+                          extra: state.records[index].id);
+                    },
+                    child: RecordCard(
+                      record: state.records[index],
+                    ),
                   );
                 },
               );
             } else if (state is FetchAllRecordsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const RecordCardShimmer();
             } else if (state is FetchAllRecordsFailure) {
               return Center(
                 child: Text(state.errMessage),

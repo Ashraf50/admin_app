@@ -3,6 +3,7 @@ import 'package:admin_app/core/helper/custom_refresh_token.dart';
 import 'package:admin_app/core/helper/navigator_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 
 class ApiHelper {
   final Dio _dio = Dio();
@@ -108,11 +109,7 @@ class ApiHelper {
               for (var callback in queueCopy) {
                 callback('');
               }
-              NavigationService.rootNavigatorKey.currentState
-                  ?.pushNamedAndRemoveUntil(
-                '/sign_in',
-                (route) => false,
-              );
+              NavigationService.rootNavigatorKey.currentContext?.go('/sign_in');
               return handler.reject(error);
             } finally {
               _isRefreshing = false;

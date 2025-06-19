@@ -1019,6 +1019,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Service Details`
+  String get service_details {
+    return Intl.message(
+      'Service Details',
+      name: 'service_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No services available`
+  String get noServicesAvailable {
+    return Intl.message(
+      'No services available',
+      name: 'noServicesAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

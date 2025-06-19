@@ -1,5 +1,4 @@
 import 'package:admin_app/core/constant/app_colors.dart';
-import 'package:admin_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../../features/add_record/data/model/record_model.dart';
 
@@ -7,11 +6,13 @@ class DropdownTextField extends StatelessWidget {
   final List<RecordModel> records;
   final ValueChanged<RecordModel> onChanged;
   final RecordModel? selectedRecord;
+  final String hint;
   const DropdownTextField({
     super.key,
     required this.records,
     required this.onChanged,
     required this.selectedRecord,
+    required this.hint,
   });
 
   @override
@@ -26,9 +27,7 @@ class DropdownTextField extends StatelessWidget {
           isExpanded: true,
           value: selectedRecord,
           dropdownColor: AppColors.white,
-          hint: Text(
-            S.of(context).selectService,
-          ),
+          hint: Text(hint),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           items: records.map((record) {
             return DropdownMenuItem<RecordModel>(

@@ -95,5 +95,7 @@
     "edit_section": "تعديل القسم",
     "sure_delete_section": "هل أنت متأكد أنك تريد حذف هذا القسم؟",
     "no_service": "لا توجد خدمة",
-    "automatic_assignment": "تخصيص التذكرة تلقائيًا"
+    "automatic_assignment": "تخصيص التذكرة تلقائيًا",
+    "service_details":"تفاصيل الخدمة",
+    "noServicesAvailable": "لا توجد خدمات متاحة"
 }

@@ -17,4 +17,8 @@ abstract class SectionRepo {
   });
   Future<Either<Failure, Unit>> createSection(
       {required String name, required int serviceId});
+  Future<Either<Failure, List<SectionModel>>> searchSection({
+    required String name,
+    required int serviceId,
+  });
 }
